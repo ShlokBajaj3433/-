@@ -14,6 +14,14 @@ public class Wrapper {
         swap(num1,num2);
         System.out.println(a + " " + b);
         System.out.println(num1 + " " + num2);
+
+        final TryingGarbageCollector obj = new TryingGarbageCollector("Shlok Bajaj");
+
+        TryingGarbageCollector obj2;
+
+        for(int i = 0 ; i < 100000000 ; i++){
+            obj2 = new TryingGarbageCollector("Object " + i);
+        }
         
     } 
 
@@ -24,4 +32,18 @@ public class Wrapper {
             x = y ;
             y = temp ;
         }
-}
+
+        
+
+        
+        public static class TryingGarbageCollector {
+            String name ;
+
+            TryingGarbageCollector(String name){
+                this.name = name ;
+            }
+            protected void finalize() throws Throwable{ // finalize method is called when the object is garbage collected
+            System.out.println("Object is Destroyed");
+        }
+        }
+    }
